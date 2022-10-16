@@ -1,22 +1,26 @@
-package cc.towerdefence.api.serverorchestratorjava.controller;
+package cc.towerdefence.api.serverdiscovery.controller;
 
 import cc.towerdefence.api.model.server.ConnectableServer;
 import cc.towerdefence.api.model.server.LobbyServer;
 import cc.towerdefence.api.model.server.ProxyServer;
-import cc.towerdefence.api.service.ServerOrchestratorGrpc;
+import cc.towerdefence.api.service.ServerDiscoveryGrpc;
 import com.google.protobuf.Empty;
 import dev.agones.allocation.AllocationProto;
 import dev.agones.allocation.AllocationServiceGrpc;
 import io.grpc.stub.StreamObserver;
 import lombok.RequiredArgsConstructor;
 import net.devh.boot.grpc.server.service.GrpcService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 
 
 @Controller
 @GrpcService
 @RequiredArgsConstructor
-public class ServerOrchestratorController extends ServerOrchestratorGrpc.ServerOrchestratorImplBase {
+public class ServerOrchestratorController extends ServerDiscoveryGrpc.ServerDiscoveryImplBase {
+    private static final Logger LOGGER = LoggerFactory.getLogger(ServerOrchestratorController.class);
+
     private final AllocationServiceGrpc.AllocationServiceStub allocationServiceStub;
 
     @Override
@@ -59,6 +63,7 @@ public class ServerOrchestratorController extends ServerOrchestratorGrpc.ServerO
 
             @Override
             public void onError(Throwable throwable) {
+                LOGGER.error("Error getting LOBBY server: ", throwable);
                 responseObserver.onError(throwable);
             }
 

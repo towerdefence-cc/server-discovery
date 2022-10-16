@@ -1,4 +1,4 @@
-package cc.towerdefence.api.serverorchestratorjava;
+package cc.towerdefence.api.serverdiscovery;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

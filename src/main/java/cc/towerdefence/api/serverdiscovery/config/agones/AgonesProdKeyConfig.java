@@ -1,4 +1,4 @@
-package cc.towerdefence.api.serverorchestratorjava.config.agones;
+package cc.towerdefence.api.serverdiscovery.config.agones;
 
 import io.grpc.ChannelCredentials;
 import io.grpc.TlsChannelCredentials;

@@ -1,4 +1,4 @@
-package cc.towerdefence.api.serverorchestratorjava.config;
+package cc.towerdefence.api.serverdiscovery.config;
 
 import dev.agones.allocation.AllocationServiceGrpc;
 import io.grpc.ChannelCredentials;
@@ -12,7 +12,7 @@ public class AgonesConfig {
 
     @Bean
     public ManagedChannel managedChannel(ChannelCredentials channelCredentials) {
-        return Grpc.newChannelBuilderForAddress("10.110.130.64", 443, channelCredentials)
+        return Grpc.newChannelBuilderForAddress("10.106.178.172", 443, channelCredentials) // todo dynamically discover
                 .build();
     }
 

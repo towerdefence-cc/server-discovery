@@ -1,4 +1,4 @@
-package cc.towerdefence.api.serverorchestratorjava;
+package cc.towerdefence.api.serverdiscovery;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

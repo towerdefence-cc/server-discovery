@@ -1,1 +1,3 @@
-rootProject.name = 'server-orchestrator-java'
+rootProject.name = 'server-discovery'
+
+include "proto"

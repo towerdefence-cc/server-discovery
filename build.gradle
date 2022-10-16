@@ -1,12 +1,15 @@
 plugins {
-    id 'org.springframework.boot' version '2.7.4'
-    id 'io.spring.dependency-management' version '1.0.14.RELEASE'
-    id 'java'
+    id "org.springframework.boot" version "2.7.4"
+    id "io.spring.dependency-management" version "1.0.14.RELEASE"
+    id "java"
+//    id "shadow"
+
+    id("io.freefair.lombok") version "6.5.1"
 }
 
-group = 'cc.towerdefence.api'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '17'
+group = "cc.towerdefence.api"
+version = "dev"
+sourceCompatibility = "17"
 
 configurations {
     compileOnly {
@@ -16,17 +19,32 @@ configurations {
 
 repositories {
     mavenCentral()
+    mavenLocal()
 }
+
+def grpcVersion = "1.49.2"
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
-    compileOnly 'org.projectlombok:lombok'
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
-    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
-    annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    // gRPC
+    implementation("io.grpc:grpc-netty:${grpcVersion}")
+    implementation("net.devh:grpc-server-spring-boot-starter:2.13.1.RELEASE") {
+        exclude group: "io.grpc", module: "grpc-netty-shaded" // causes version conflicts
+    }
+
+    implementation project(":proto")
+
+    implementation("cc.towerdefence.api:agones-sdk:1.0.0")
+    implementation("io.kubernetes:client-java:16.0.0")
+
+    developmentOnly("org.springframework.boot:spring-boot-devtools")
+    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
-tasks.named('test') {
+bootBuildImage {
+    imageName = "towerdefence-cc/server-discovery:dev"
+}
+
+test {
     useJUnitPlatform()
 }
