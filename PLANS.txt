@@ -1,0 +1,16 @@
+keep a buffer of 1 of each map for TowerDefence. Only create a new one once filled.
+
+Keep a buffer of 2 proxies, have capacity for 100 players to join in a short timespan.
+
+Keep a buffer of 2 lobbies, have a capacity for 100 players to join in a short timespan.
+
+Proxy:
+  - Buffer of 2 servers
+  - Capacity for a 100 player burst
+
+Lobby:
+  - Buffer of 2 servers
+  - Capacity for a 100 player burst
+
+TowerDefence:
+  - Buffer of 1 server of each map available
