@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import javax.annotation.PostConstruct;
-import javax.net.ssl.X509TrustManager;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.security.Security;
@@ -23,23 +22,6 @@ public class AgonesProdKeyConfig {
     @Bean
     public ChannelCredentials sslContext() throws IOException {
         return TlsChannelCredentials.newBuilder()
-                .trustManager(
-                        new X509TrustManager() {
-                            public java.security.cert.X509Certificate[] getAcceptedIssuers() {
-                                return null;
-                            }
-
-                            public void checkClientTrusted(
-                                    java.security.cert.X509Certificate[] certs,
-                                    String authType) {
-                            }
-
-                            public void checkServerTrusted(
-                                    java.security.cert.X509Certificate[] certs,
-                                    String authType) {
-                            }
-                        }
-                )
                 .keyManager(AGONES_CERTIFICATE_PATH.toFile(), AGONES_KEY_PATH.toFile())
                 .trustManager(AGONES_CA_CERTIFICATE_PATH.toFile())
                 .build();
