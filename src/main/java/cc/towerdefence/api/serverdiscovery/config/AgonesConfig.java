@@ -12,7 +12,7 @@ public class AgonesConfig {
 
     @Bean
     public ManagedChannel managedChannel(ChannelCredentials channelCredentials) {
-        return Grpc.newChannelBuilderForAddress("10.106.178.172", 443, channelCredentials) // todo dynamically discover
+        return Grpc.newChannelBuilderForAddress("agones-allocator.agones-system.svc", 10000, channelCredentials)
                 .build();
     }
 
