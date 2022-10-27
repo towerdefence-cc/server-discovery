@@ -12,7 +12,10 @@ public class AgonesConfig {
 
     @Bean
     public ManagedChannel managedChannel(ChannelCredentials channelCredentials) {
-        return Grpc.newChannelBuilderForAddress("agones-allocator.agones-system.svc", 10000, channelCredentials)
+        String host = System.getenv("AGONES_ALLOCATOR_ADDRESS");
+        int port = Integer.parseInt(System.getenv("AGONES_ALLOCATOR_PORT"));
+
+        return Grpc.newChannelBuilderForAddress(host, port, channelCredentials)
                 .build();
     }
 
