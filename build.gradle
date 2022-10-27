@@ -20,6 +20,7 @@ configurations {
 repositories {
     mavenCentral()
     mavenLocal()
+    maven { url = "https://repo.towerdefence.cc/snapshots" }
 }
 
 def grpcVersion = "1.49.2"
@@ -30,7 +31,7 @@ dependencies {
         exclude group: "io.grpc", module: "grpc-netty-shaded" // causes version conflicts
     }
 
-    implementation("cc.towerdefence.api:grpc-sdk:1.0.0")
+    implementation("cc.towerdefence.api:grpc-sdk:22f2328")
 
     implementation("cc.towerdefence.api:agones-sdk:1.0.0")
     implementation("io.kubernetes:client-java:16.0.0")

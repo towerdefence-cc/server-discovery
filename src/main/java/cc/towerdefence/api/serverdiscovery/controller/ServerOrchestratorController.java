@@ -1,8 +1,7 @@
 package cc.towerdefence.api.serverdiscovery.controller;
 
-import cc.towerdefence.api.model.server.ConnectableServer;
-import cc.towerdefence.api.model.server.LobbyServer;
-import cc.towerdefence.api.model.server.ProxyServer;
+import cc.towerdefence.api.model.server.ConnectableServerProto;
+import cc.towerdefence.api.model.server.LobbyServerProto;
 import cc.towerdefence.api.service.ServerDiscoveryGrpc;
 import com.google.protobuf.Empty;
 import dev.agones.allocation.AllocationProto;
@@ -24,12 +23,7 @@ public class ServerOrchestratorController extends ServerDiscoveryGrpc.ServerDisc
     private final AllocationServiceGrpc.AllocationServiceStub allocationServiceStub;
 
     @Override
-    public void getSuggestedProxyServer(Empty request, StreamObserver<ProxyServer> responseObserver) {
-        super.getSuggestedProxyServer(request, responseObserver);
-    }
-
-    @Override
-    public void getSuggestedLobbyServer(Empty request, StreamObserver<LobbyServer> responseObserver) {
+    public void getSuggestedLobbyServer(Empty request, StreamObserver<LobbyServerProto.LobbyServer> responseObserver) {
         this.allocationServiceStub.allocate(AllocationProto.AllocationRequest.newBuilder()
                 .setNamespace("towerdefence")
                 .addGameServerSelectors(
@@ -51,9 +45,9 @@ public class ServerOrchestratorController extends ServerDiscoveryGrpc.ServerDisc
                 .build(), new StreamObserver<>() {
             @Override
             public void onNext(AllocationProto.AllocationResponse value) {
-                responseObserver.onNext(LobbyServer.newBuilder()
+                responseObserver.onNext(LobbyServerProto.LobbyServer.newBuilder()
                         .setConnectableServer(
-                                ConnectableServer.newBuilder()
+                                ConnectableServerProto.ConnectableServer.newBuilder()
                                         .setAddress(value.getAddress())
                                         .setPort(value.getPortsList().get(0).getPort())
                                         .setId(value.getGameServerName())
