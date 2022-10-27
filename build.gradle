@@ -34,7 +34,7 @@ dependencies {
 
     implementation("cc.towerdefence.api:grpc-sdk:22f2328")
 
-    implementation("cc.towerdefence.api:agones-sdk:1.0.1")
+    implementation("cc.towerdefence.api:agones-sdk:1.0.2")
     implementation('io.kubernetes:client-java:16.0.1')
 
     developmentOnly("org.springframework.boot:spring-boot-devtools")
@@ -43,7 +43,7 @@ dependencies {
 }
 
 bootBuildImage {
-    imageName = "towerdefence.cc/server-discovery:dev"
+    imageName = "server-discovery:dev"
 
     docker {
         publishRegistry {
