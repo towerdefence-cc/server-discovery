@@ -21,6 +21,7 @@ repositories {
     mavenCentral()
     mavenLocal()
     maven { url = "https://repo.towerdefence.cc/snapshots" }
+    maven { url = "https://repo.towerdefence.cc/releases" }
 }
 
 def grpcVersion = "1.49.2"
@@ -33,8 +34,8 @@ dependencies {
 
     implementation("cc.towerdefence.api:grpc-sdk:22f2328")
 
-    implementation("cc.towerdefence.api:agones-sdk:1.0.0")
-    implementation("io.kubernetes:client-java:16.0.0")
+    implementation("cc.towerdefence.api:agones-sdk:1.0.1")
+    implementation('io.kubernetes:client-java:16.0.1')
 
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
@@ -42,8 +43,17 @@ dependencies {
 }
 
 bootBuildImage {
-    imageName = "towerdefence-cc/server-discovery:dev"
+    imageName = "towerdefence.cc/server-discovery:dev"
+
+    docker {
+        publishRegistry {
+            url = "https://ghcr.io"
+            username = System.getenv("REGISTRY_USERNAME")
+            password = System.getenv("REGISTRY_PASSWORD")
+        }
+    }
 }
+
 
 test {
     useJUnitPlatform()
