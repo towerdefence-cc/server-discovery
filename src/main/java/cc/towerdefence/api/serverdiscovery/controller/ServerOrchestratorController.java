@@ -30,12 +30,6 @@ public class ServerOrchestratorController extends ServerDiscoveryGrpc.ServerDisc
                         AllocationProto.GameServerSelector.newBuilder()
                                 .putMatchLabels("agones.dev/fleet", "lobby")
                                 .setGameServerState(AllocationProto.GameServerSelector.GameServerState.ALLOCATED)
-                                .setPlayers(
-                                        AllocationProto.PlayerSelector.newBuilder()
-                                                .setMinAvailable(1)
-                                                .setMaxAvailable(Integer.MAX_VALUE)
-                                                .build()
-                                )
                 ).addGameServerSelectors(
                         AllocationProto.GameServerSelector.newBuilder()
                                 .putMatchLabels("agones.dev/fleet", "lobby")
