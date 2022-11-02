@@ -16,6 +16,7 @@ public class AgonesConfig {
         int port = Integer.parseInt(System.getenv("AGONES_ALLOCATOR_PORT"));
 
         return Grpc.newChannelBuilderForAddress(host, port, channelCredentials)
+                .defaultLoadBalancingPolicy("round_robin")
                 .build();
     }
 
