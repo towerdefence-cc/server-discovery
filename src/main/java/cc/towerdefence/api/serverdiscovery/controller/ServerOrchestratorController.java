@@ -58,6 +58,7 @@ public class ServerOrchestratorController extends ServerDiscoveryGrpc.ServerDisc
                                             .setId(allocation.getGameServerName())
                                             .build()
                             ).build());
+                    responseObserver.onCompleted();
                 },
                 throwable -> {
                     LOGGER.error("Error getting LOBBY server: ", throwable);
@@ -96,6 +97,7 @@ public class ServerOrchestratorController extends ServerDiscoveryGrpc.ServerDisc
                             .setId(allocation.getGameServerName())
                             .build()
                     );
+                    responseObserver.onCompleted();
                 },
                 throwable -> {
                     LOGGER.error("Error getting VOID-OTP server: ", throwable);
