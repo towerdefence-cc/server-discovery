@@ -21,7 +21,7 @@ public class AgonesConfig {
     }
 
     @Bean
-    public AllocationServiceGrpc.AllocationServiceStub allocationServiceStub(ManagedChannel managedChannel) {
-        return AllocationServiceGrpc.newStub(managedChannel);
+    public AllocationServiceGrpc.AllocationServiceFutureStub allocationServiceStub(ManagedChannel managedChannel) {
+        return AllocationServiceGrpc.newFutureStub(managedChannel);
     }
 }
